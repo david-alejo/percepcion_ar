@@ -1,6 +1,6 @@
 xhost +local:docker 2>/dev/null || true
 
-mkdir -p $HOME/rssa_shared
+mkdir -p $HOME/percepcion_ar_shared
 
 docker run -it \
     --env="DISPLAY=$DISPLAY" \
@@ -13,8 +13,8 @@ docker run -it \
     --name rssa \
     --net=host \
     --privileged \
-    --mount type=bind,source=$HOME/rssa_shared,target=/home/rssa \
-    rssa \
+    --mount type=bind,source=$HOME/percepcion_ar_shared,target=/home/percepcion_ar \
+    percepcion_ar \
     bash
 
-docker rm rssa
+docker rm percepcion_ar

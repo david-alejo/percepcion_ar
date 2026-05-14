@@ -44,28 +44,28 @@ RUN apt install libspdlog-dev libceres-dev -y
 # We will add a custom user so that we work in user space by default
 # And then switch to that user
 # Source: https://www.docker.com/blog/understanding-the-docker-user-instruction/
-RUN useradd -ms /bin/bash rssa
+RUN useradd -ms /bin/bash percepcion_ar
 # Sometimes it is good to add a password so that we can use sudo to install things
 # To this end, uncomment the following line, remove extra ### and change the password 
-RUN echo "rssa:rssa" | chpasswd 
+RUN echo "percepcion_ar:percepcion_ar" | chpasswd 
 ### Remove #### to change the password
-RUN adduser rssa sudo & adduser rssa dialout & adduser rssa plugdev
-RUN usermod -aG dialout rssa  && usermod -aG plugdev rssa  && usermod -aG sudo rssa 
+RUN adduser percepcion_ar sudo & adduser percepcion_ar dialout & adduser percepcion_ar plugdev
+RUN usermod -aG dialout percepcion_ar  && usermod -aG plugdev percepcion_ar  && usermod -aG sudo percepcion_ar 
 
 # For the real robots. Please see how to share USB from windows via usbipd 
 RUN apt -y install usbutils udev
 
 RUN apt install -y ros-jazzy-turtlebot3-msgs ros-jazzy-turtlebot3 \
-    ros-jazzy-turtlebot3-simulations ros-jazzy-turtlebot3-navigation2 ros-jazzy-turtlebot3-teleop 
+    ros-jazzy-turtlebot3-simulations ros-jazzy-turtlebot3-navigation2 ros-jazzy-turtlebot3-teleop ros-jazzy-slam-toolbox
     
 # Test the GUI
 
 RUN apt update && apt install -y x11-apps mesa-utils
 
-USER rssa
+USER percepcion_ar
 
 # We will use the home directory as work directory
 # So that the docker starts at HOME!
-WORKDIR "/home/rssa"
-ENV HOME="/home/rssa"
+WORKDIR "/home/percepcion_ar"
+ENV HOME="/home/percepcion_ar"
 
