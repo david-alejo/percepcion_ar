@@ -327,9 +327,10 @@ print(oposes)
 
 #ground truth
 init = False
+plt.plot(X, Y, 'ro', label='Ground Truth')
 for i, (x, y, theta) in enumerate(zip(X,Y,Theta)):
     if init:
-        plt.plot([x_a, x], [y_a, y], 'r-o', label='gt')
+        plt.plot([x_a, x], [y_a, y], 'r-o')
     else:
         init = True
     x_a = x
@@ -337,20 +338,26 @@ for i, (x, y, theta) in enumerate(zip(X,Y,Theta)):
     theta_a = theta
 
 init = False
+plt.plot(XN, YN, 'go', label='Odometry')
 for i, (x, y, theta) in enumerate(zip(XN,YN,ThetaN)):
      if init:
-         plt.plot([x_a, x], [y_a, y], 'g-x', label='odom')
+         plt.plot([x_a, x], [y_a, y], 'g-x')
      else:
          init = True
      x_a = x
      y_a = y
      theta_a = theta
- 
+
+XO = [0] * len(oposes)
+YO = [0] * len(oposes)
+for i in range(len(oposes)):
+    XO[i] = oposes[i][0]
+    YO[i] = oposes[i][1]
+plt.plot(XO, YO, 'bo', label='Optimized')
 for i, ref_pose in enumerate(oposes):
      if i + 1 >= len(oposes):
          break
      next_pose = oposes[i + 1]
-     plt.plot([ref_pose[0], next_pose[0]], [ref_pose[1], next_pose[1]], 'b-o', label='op-aft')
- 
- 
+     plt.plot([ref_pose[0], next_pose[0]], [ref_pose[1], next_pose[1]], 'b-o')
+plt.legend()
 plt.show()
