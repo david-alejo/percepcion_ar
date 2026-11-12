@@ -294,12 +294,12 @@ for i in range(1, len(X)):
 
 # Añadimos loop closure entre nodos similares
 pairs = []
-for i in range(0, 40, 2):
+for i in range(0, 40, 10):
         pairs.append((i, i+80))
     # for i in range(len(X)):
     # 	pairs.append((0, i))
 
-info_loop = 0.3
+info_loop = 7
 
 for p in pairs:
         p1 = (X[p[0]], Y[p[0]], Theta[p[0]])
